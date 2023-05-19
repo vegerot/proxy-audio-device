@@ -216,8 +216,10 @@ int onDevicesChanged(AudioObjectID inObjectID,
     }
 
     AudioDeviceID proxyAudioBox = AudioDevice::audioDeviceIDForBoxUID(CFSTR(kBox_UID));
+    NSString *formattedThing = [NSString stringWithFormat:@"outputDevice=%@", uid];
+    NSLog(@"%@\n", formattedThing);
     AudioDevice::setObjectName(proxyAudioBox,
-                               (__bridge_retained CFStringRef)[NSString stringWithFormat:@"outputDevice=%@", uid]);
+                               (__bridge_retained CFStringRef)formattedThing);
 }
 
 - (NSString *)currentOutputDeviceBufferFrameSize {
