@@ -326,7 +326,8 @@ CFStringRef AudioDevice::copyObjectName(AudioObjectID device) {
 void AudioDevice::setObjectName(AudioObjectID object, CFStringRef newName) {
     AudioObjectPropertyAddress setNameAddr = {
         kAudioObjectPropertyName, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster};
-    AudioObjectSetPropertyData(object, &setNameAddr, 0, NULL, sizeof(newName), &newName);
+    OSStatus err = AudioObjectSetPropertyData(object, &setNameAddr, 0, NULL, sizeof(newName), &newName);
+    assert(err == noErr);
 }
 
 AudioDeviceID AudioDevice::audioDeviceIDForUID(CFStringRef uid, AudioObjectPropertySelector selector) {
